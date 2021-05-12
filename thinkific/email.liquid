@@ -1,0 +1,16 @@
+{% assign thinkific = false %}
+{% assign kit = false %}
+{% for line in line_items %}
+    {% if line.product.title contains '*Lab' %}
+        {% assign thinkific = true %}
+        {% if line.variant.title contains 'makers kit' %}
+            {% assign kit = true %}
+        {% endif %}
+    {% endif  %}
+{% endfor %}
+{% if thinkific %}
+  <p>Your Order contains a class in the Little Herbal Lab. You will receive a follow up email with a link so that you can log in.</p>
+  {% unless kit %}
+  	<p>Your order does not contain a makers kit, this is fine if you have all the supplies you need for the class already already. If you decide you do need a kit you can find it <a href="thelittleherbalapothecary.com">here</a></p>
+  {% endunless %}
+{% endif %}

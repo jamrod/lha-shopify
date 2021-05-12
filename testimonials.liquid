@@ -1,0 +1,81 @@
+<div class="rich-text">
+  {% if section.settings.section_heading != blank %}
+    <div class="section-header section-header--small">
+      <h2>{{ section.settings.section_heading | escape }}</h2>
+    </div>
+    {% endif %}
+  {% for block in section.blocks %}
+    <figure>
+      {% if block.settings.pull_quote != blank %}
+        <div class="pull-quote">
+          <strong>{{ block.settings.pull_quote }}</strong>
+        </div>
+      {% endif %}
+        {% if block.settings.name != blank %}
+        <div class="quote-name">
+          <figcaption><em>&mdash;{{ block.settings.name }}</em></figcaption>
+        </div>
+      {% endif %}
+        {% if block.settings.full_quote != blank %}
+        <div class="full-quote">
+          <blockquote>{{ block.settings.full_quote }}</blockquote>
+        </div>
+      {% endif %}
+    </figure>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+  {
+	"name": "Testimonials",
+	"settings": [{
+		"id": "section_heading",
+		"type": "text",
+		"label": "Heading",
+		"default": "TESTIMONIALS"
+	}],
+	"blocks": [{
+		"type": "quote",
+		"name": "quote",
+		"settings": [{
+				"id": "pull_quote",
+				"type": "text",
+				"label": "Pull Quote",
+				"default": "Best ever..."
+			},
+			{
+				"id": "name",
+				"type": "text",
+				"label": "Name",
+				"default": "Jane Doe"
+			},
+			{
+				"id": "full_quote",
+				"type": "textarea",
+				"label": "Full Quote",
+				"default": "Long text..."
+			}
+		]
+	}]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+  .pull-quote{
+
+  }
+
+  .quote-name{
+	font-size: small;
+  }
+
+  .full-quote{
+    font-size:medium;
+  }
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
