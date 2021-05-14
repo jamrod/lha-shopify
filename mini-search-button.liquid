@@ -1,0 +1,50 @@
+<div id="search-container">
+  <div id="mini-search">
+    <span class="icon icon-search" aria-hidden="true"></span>
+  </div>
+  <div id="hidden-search">
+    {% include 'search-bar' %}
+  </div>
+</div>
+
+<style>
+  #search-container{
+    position: fixed;
+    top: 0;
+    left: 2px;
+  }
+  #mini-search{
+    display: none;
+    position: fixed;
+    margin: 0;
+    padding: 2px;
+  }
+  #hidden-search {
+    display: none;
+    position: relative;
+    margin: 2px;
+  }
+</style>
+
+<script>
+  const searchLink = document.querySelector("#mini-search")
+  const hiddenSearch = document.querySelector("#hidden-search")
+  window.onscroll = function(){showMiniSearch()}
+  searchLink.addEventListener("click", showSearch)
+  
+  
+  function showMiniSearch(){
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+      searchLink.style.display = "block"
+      hiddenSearch.style.display = "none"
+    } else {
+      searchLink.style.display = "none"
+      hiddenSearch.style.display = "none"
+    }
+  }
+   
+  function showSearch() {
+    searchLink.style.display = "none"
+    hiddenSearch.style.display = "block"  
+  }
+</script>
