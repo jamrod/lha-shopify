@@ -2,17 +2,18 @@
   Thank you for your purchase!
 {% endcapture %}
 {% capture email_body %}
-  Hi {{ customer.first_name }}, we're getting your order ready. We will notify you when it has been sent. If you selected local pick up, you will receive a notification when your order is ready for pick up. If you purchased a class, you are all signed up! We will send out a reminder email as the date gets closer.
 {% assign thinkific = false %}
 {% assign kit = false %}
+{% assign noncourse = false %}
 {% for line in line_items %}
     {% if line.product.title contains 'Test Course' %}
-        {% assign thinkific = true %}
-        {% if line.variant.title contains 'makers kit' %}
-            {% assign kit = true %}
-        {% endif %}
-    {% endif  %}
+      {% assign thinkific = true %}
+    {% if line.variant.title contains 'makers kit' %}
+      {% assign kit = true %}
+    {% endif %}
+  {% endif  %}
 {% endfor %}
+  Hi {{ customer.first_name }}, we're getting your order ready. We will notify you when it has been sent. If you selected local pick up, you will receive a notification when your order is ready for pick up. If you purchased a class, you are all signed up! We will send out a reminder email as the date gets closer.
 {% if thinkific %}
   <p>Your Order contains a class in the Little Herbal Lab. You will receive a follow up email with a link so that you can log in.</p>
   {% unless kit %}
