@@ -1,0 +1,8 @@
+{% capture email_body %}
+  {% if gift_card.expires_on %}
+    Your {{ gift_card.balance | money_without_trailing_zeros }} gift card for {{ shop.name }} is active. Keep this email or write down your gift card number. This gift card expires on {{ gift_card.expires_on }}.
+  {% else %}
+    Your {{ gift_card.balance | money_without_trailing_zeros }} gift card for {{ shop.name }} is active. Use the link below to access your gift card which can be redeemed in person or online. 
+    <br>To redeem your gift card online just enter the code at checkout. To redeem the gift card in person, you can print it out or we can scan it right from your phone.
+  {% endif %}
+{% endcapture %}

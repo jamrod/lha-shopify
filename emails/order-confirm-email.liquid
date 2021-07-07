@@ -11,21 +11,24 @@
       {% assign kit = true %}
     {% endif %}
 {% endfor %}
-Hi {{ customer.first_name }}, thank you for your order. 
+Hi {{ customer.first_name }}, thank you for your order! 
 {% if thinkific %}
-  <p>Your order contains a class in the Little Herbal Lab. You will receive a follow up email with information on how to log in to the Lab.</p>
+  <p>Your order contains a workshop in the Little Herbal Lab. You will receive a follow up email with information on how to access your workshop via Thinkific.</p>
   {% unless kit %}
-  	<p>Your order does not contain a Maker's Kit, this is fine if you have all the supplies you need for the class already. If you decide you do need a kit you can find it <a href="https://thelittleherbalapothecary.com/collections/recorded-workshops">here</a></p>
+  	<p>Your order does not contain a Maker's Kit. If you decide you do need a kit you can find it <a href="https://thelittleherbalapothecary.com/collections/recorded-workshops">here</a>.</p>
   {% endunless %}
 {% endif %}
 {% if requires_shipping %}
-  We're getting your order ready.
+  <p>We're getting your order ready.
     {% if order.pickup_in_store? %}
-      You will receive a notification when your order is ready for pick up.
-        {% else %} We will notify you when it has been sent.
+      You will receive a notification when your order is ready for pick up.</p>
+        {% else %} We will notify you when it has been sent.</p>
     {% endif %}
   {% else %}
-    If you purchased a class, you are all signed up! We will send out a reminder email as the date gets closer.
+  {% unless thinkific %}
+    <p>If you purchased an in-person workshop, you are all signed up! We will send out a reminder email as the date gets closer.</p>
+    <p>If you purchased a Gift Card, you will receive a follow up email with your Gift Card and instructions on how to redeem it.</p>
+  {% endunless %}
 {% endif %}
 {% endcapture %}
 
