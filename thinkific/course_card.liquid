@@ -3,7 +3,7 @@
 {% endcomment %}
 
 {% assign addresses = 'addresses.json' %}
-<a class="course-card course-card__public {{ course.status }}" href="{{ course.links.landing_page_url }}" id="{{course.links.landing_page_url | remove: "/"}}">
+<a class="course-card course-card__public {{ course.status }}" href="https://thelittleherbalapothecary.com/collections/recorded-workshops" id="{{course.links.landing_page_url | remove: "/"}}">
   <div class="course-card__body">
     <p class="course-card__category">
       {% for collection in course.collections %}
@@ -61,12 +61,15 @@
 
 <script>
 
-    $.getJSON("{{'addresses.json' | theme_asset_url}}", function(json) {
+    $.getJSON("https://lha-cloud-files.s3-us-west-2.amazonaws.com/addresses.json", function(json) {
         let addresses = json
-        let courseName = "{{course.name }}"
+        let courseName = "{{course.name }}".replace(/&amp;/g, '&').replace(/&quot;/g, `"`).replace(/&apos;/g, "'")
+        let handle = addresses[courseName]
+        if (handle) {
         let courseId = "{{course.links.landing_page_url | remove: "/"}}"
         let link = document.querySelector(`#${courseId}`)
-        link.href = `https://thelittleherbalapothecary.com/products/${addresses[courseName]}`
+            link.href = `https://thelittleherbalapothecary.com/products/${handle}`
+        }
     });
 
 </script>
