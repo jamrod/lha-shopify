@@ -1,5 +1,8 @@
-{% capture email_title %}Thank you for your purchase! {% endcapture %}
-{% capture email_body %}Hi {{ customer.first_name }}, we're getting your order ready. We will notify you when it has been sent. If you selected local pick up, you will receive a notification when your order is ready for pick up. If you purchased a class, you are all signed up! We will send out a reminder email as the date gets closer.
+{% capture email_title %}
+  Thank you for your purchase!
+{% endcapture %}
+{% capture email_body %}
+  Hi {{ customer.first_name }}, we're getting your order ready. We will notify you when it has been sent. If you selected local pick up, you will receive a notification when your order is ready for pick up. If you purchased a class, you are all signed up! We will send out a reminder email as the date gets closer.
 {% assign thinkific = false %}
 {% assign kit = false %}
 {% for line in line_items %}
