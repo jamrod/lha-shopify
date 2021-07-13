@@ -1,0 +1,7 @@
+  {% capture testimonial_list %}
+    {% for block in section.blocks %}
+      {{block.settings.pull_quote}}|{{block.settings.name}}|{{block.settings.full_quote}}
+      {% unless forloop.last %}::{% endunless %}
+    {% endfor %}
+    {% assign testimonial_array = testimonial_list | split: '::' %}
+  {% endcapture %}

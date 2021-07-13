@@ -1,0 +1,184 @@
+<div class="rich-text">
+  {% if section.settings.section_heading != blank %}
+    <div class="section-header section-header--small">
+      <h2>{{ section.settings.section_heading | escape }}</h2>
+    </div>
+  {% endif %}
+  <section class="testimonial-carousel">
+    <ol class="testimonial-viewport">
+      {% for block in section.blocks %}
+		{% assign current = 'slide' | append: forloop.index %}
+      {% unless forloop.first %}
+        {% assign previousI = forloop.index0 %}
+      {% else %}
+        {% assign previousI = forloop.rindex[0] %}
+      {% endunless %}
+      {% assign previous = '#slide' | append: previousI %}
+      {% unless forloop.last %}
+        {% assign nextI = forloop.index | plus: 1 %}
+      {% else %}
+        {% assign nextI = 1 %}
+      {% endunless %}
+      {% assign next = '#slide' | append: nextI %}
+        <li class="testimonial-slide" id="{{ current }}">
+          <a href="{{ previous }}"></a>
+          <figure class="testimonial-text">
+            {% if block.settings.pull_quote != blank %}
+              <div class="pull-quote">
+                <strong>{{ block.settings.pull_quote }}</strong>
+              </div>
+            {% endif %}
+              {% if block.settings.name != blank %}
+              <div class="quote-name">
+                <figcaption><em>&mdash;{{ block.settings.name }}</em></figcaption>
+              </div>
+            {% endif %}
+              {% if block.settings.full_quote != blank %}
+              <div class="full-quote">
+                <blockquote>{{ block.settings.full_quote }}</blockquote>
+              </div>
+            {% endif %}
+          </figure>
+          <a href="{{ next }}"></a>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+</div>
+
+
+{% schema %}
+  {
+	"name": "Testimonials",
+	"settings": [{
+		"id": "section_heading",
+		"type": "text",
+		"label": "Heading",
+		"default": "TESTIMONIALS"
+	}],
+	"blocks": [{
+		"type": "quote",
+		"name": "quote",
+		"settings": [{
+				"id": "pull_quote",
+				"type": "text",
+				"label": "Pull Quote",
+				"default": "Best ever..."
+			},
+			{
+				"id": "name",
+				"type": "text",
+				"label": "Name",
+				"default": "Jane Doe"
+			},
+			{
+				"id": "full_quote",
+				"type": "textarea",
+				"label": "Full Quote",
+				"default": "Long text..."
+			}
+		]
+	}]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+  .quote-name{
+	font-size: small;
+  }
+
+  .full-quote{
+    font-size:medium;
+  }
+
+  .testimonial-carousel {
+    position: relative;
+    width: 90%;
+    height: 90%;
+  }
+
+  .testimonial-viewport {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+  }
+
+  .testimonial-slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .testimonial-text {
+    position: absolute;
+    background-color: #aaa;
+    width: 84%;
+    left: 8%;
+    min-height: 100%;
+  }
+
+  li {
+    text-decoration: none;
+    list-style: none;
+  }
+
+  .prev-slide, testimonial-carousel::before{
+    position: absolute;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  .next-slide, testimonial-carousel::after{
+    position: relative;
+    margin-top: 38%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    float: right;
+  }
+
+  testimonial-carousel::before,
+  testimonial-carousel::after {
+    content: '';
+    z-index: 1;
+    background-color: #333;
+    background-size: 1.5rem 1.5rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 4rem;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  testimonial-carousel::before {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
+  }
+
+  testimonial-carousel::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+  }
+
+  testimonial-viewport {
+    scrollbar-width: 0px;
+  }
+  testimonial-viewport::-webkit-scrollbar {
+    width: 0;
+  }
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
