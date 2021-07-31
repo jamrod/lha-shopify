@@ -1,3 +1,5 @@
-{% if item.product.metafields.links %}
+{% if item.product.metafields.link %}
   <a href="products/{{ item.product.metafields.kit.link }}">Get The Kit!</a>
 {% endif %}
+
+{% comment %} in bulk editor, in addressbar after 'edit=' add 'metafields.kit.link:string,' {% endcomment %}
