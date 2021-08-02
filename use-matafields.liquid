@@ -1,5 +1,7 @@
-{% if item.product.metafields.link %}
-  <a href="products/{{ item.product.metafields.kit.link }}">Get The Kit!</a>
+{% if item.product.metafields.kit != blank %}
+  <a href="products/{{ item.product.metafields.kit.link }}" style="color:#7F3035"><u>Add the maker's kit</u></a>
 {% endif %}
-
-{% comment %} in bulk editor, in addressbar after 'edit=' add 'metafields.kit.link:string,' {% endcomment %}
+if item.variant.title contains 'Lifetime Access'
+{% comment %} 
+in bulk editor, in addressbar after 'edit=' add 'metafields.kit.link:string,' 
+{% endcomment %}
